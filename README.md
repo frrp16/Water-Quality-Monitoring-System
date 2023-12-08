@@ -1,5 +1,6 @@
 # Water-Quality-Monitoring-System
-Deskripsi
+
+# Deskripsi
 Water Quality Monitoring System adalah sebuah proyek IoT yang bertujuan untuk mengukur dan memantau kualitas air minum, yaitu suhu dan kekeruhan air. Suhu dan kekeruhan air adalah dua parameter penting yang dapat menunjukkan tingkat kemurnian dan kesegaran air. Sistem ini menggunakan modul WiFi ESP32, sensor turbidity, sensor suhu DS18B20, dan PCB.
 
 Cara Kerja
@@ -12,9 +13,9 @@ Data kekeruhan dan suhu juga ditampilkan pada layar OLED 0.96" yang terhubung de
 
 Komponen
 Komponen yang dibutuhkan untuk membuat sistem ini adalah sebagai berikut:
-Modul WiFi ESP321
-Sensor turbidity2
-Sensor suhu DS18B203
-Resistor 4.7K
-Kabel jumper
-Breadboard
+- Modul WiFi ESP321
+- Sensor turbidity2
+- Sensor suhu DS18B203
+- Resistor 4.7K
+- Kabel jumper
+- Breadboard
