@@ -12,12 +12,13 @@
 #define MQTT_PORT 8883
 #define MQTT_TOPIC "FinalProject/B7/water_quality"
 
-#define TdsSensorPin 27
+// #define TdsSensorPin 27
 #define VREF 3.3              // analog reference voltage(Volt) of the ADC
 #define SCOUNT  30            // sum of sample point
 
 // GPIO where the DS18B20 is connected to
 const int oneWireBus = 4;
+const int TdsSensorPin = 36;
 
 // Setup a oneWire instance to communicate with any OneWire devices
 OneWire oneWire(oneWireBus);
@@ -144,28 +145,22 @@ void setup() {
   // Connect to WiFi Secure Client
   netClient.setCACert(server_cert);
   netClient.setCertificate(client_cert);
-  netClient.setPrivateKey(client_key);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  netClient.setPrivateKey(client_key); 
+  
+  pinMode(TdsSensorPin, INPUT);
+  pinMode(speakerPin, OUTPUT);
 
   // Connect to MQTT Broker
   mqttClient.setServer(MQTT_BROKER, MQTT_PORT);
   mqttClient.setCallback(callback);
-
   // start wifi connection task
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   xTaskCreatePinnedToCore(wifiTask, "Wifi", 4096, NULL, 1, NULL, 1);
-  // Create the temperature sensing task
-  xTaskCreate(getTemperature, "TemperatureTask", 4096, NULL, 1, NULL);
-
-  pinMode(TdsSensorPin, INPUT);
-  pinMode(speakerPin, OUTPUT);
-
-  // Create the TDS sensing task
-  xTaskCreate(getTDS, "TdsTask", 4096, NULL, 1, NULL);
 }
 
 void loop() {
   // ...
-  vTaskDelay(10/portTICK_PERIOD_MS);
+  // vTaskDelay(10/portTICK_PERIOD_MS);
 }
 
 void wifiTask(void* pvParameters) {
@@ -183,7 +178,11 @@ void wifiTask(void* pvParameters) {
       Serial.print("Connected! Local IP: ");
       Serial.print(WiFi.localIP());
       Serial.print("\n");   
-      xTaskCreatePinnedToCore(mqttTask, "MQTTClient", 8192, NULL, 1, NULL, 1); 
+      xTaskCreatePinnedToCore(mqttTask, "MQTTClient", 4096, NULL, 1, NULL, 1); 
+        // Create the temperature sensing task
+      xTaskCreate(getTemperature, "TemperatureTask", 4096, NULL, 1, NULL);
+      // Create the TDS sensing task
+      xTaskCreate(getTDS, "TdsTask", 4096, NULL, 1, NULL);
       vTaskDelete(NULL);
     }
     vTaskDelay(100/portTICK_PERIOD_MS);
@@ -198,7 +197,7 @@ void mqttTask(void* pvParameters) {
       Serial.print("MQTT connection failed, rc=");
       Serial.print(mqttClient.state());
       Serial.println(" Retrying in 5 seconds...");
-      delay(5000);
+      vTaskDelay(pdMS_TO_TICKS(5000));
       } 
       else {
         Serial.print("\nConnected to hive MQTT broker\n");
@@ -260,12 +259,12 @@ void getTemperature(void* pvParameters) {
    Serial.println("ºC");
 
    // If the temperature is equal to or greater than 40 degrees Celsius, the buzzer beeps
-   if (temperatureC >= 40) {
-     tone(speakerPin, 500); // Change 1000 to a higher frequency if needed
-     delay(1000); // Maintain the tone for 1 second
-     noTone(speakerPin); // Turn off the tone
-     delay(1000); // Pause for 1 second before generating the tone again
-   }
+    if (temperatureC >= 34) {
+      tone(speakerPin, 100); // Change 1000 to a higher frequency if needed
+      vTaskDelay(1000); // Maintain the tone for 1 second
+      noTone(speakerPin); // Turn off the tone
+      vTaskDelay(1000); // Pause for 1 second before generating the tone again
+    }
 
    vTaskDelay(pdMS_TO_TICKS(1000)); // Delay using FreeRTOS function
  }
@@ -293,7 +292,9 @@ int getMedianNum(int bArray[], int iFilterLen) {
   return bTemp;
 }
 
-void getTDS(void* pvParameters) {
+void getTDS(void *pvParameters) {
+  (void)pvParameters;
+
   for (;;) {
     static unsigned long analogSampleTimepoint = millis();
     if (millis() - analogSampleTimepoint > 40U) { // every 40 milliseconds, read the analog value from the ADC
@@ -325,19 +326,19 @@ void getTDS(void* pvParameters) {
         // Serial.print("voltage:");
         // Serial.print(averageVoltage, 2);
         // Serial.print("V   ");
-        Serial.print("TDS Value:");
-        Serial.print(tdsValue, 0);
-        Serial.println("ppm");
+        // Serial.print("TDS Value:");
+        // Serial.print(tdsValue, 0);
+        // Serial.println("ppm");
       }
     }
 
-    if (tdsValue >= 300) {
-      tone(speakerPin, 500); // Change 1000 to a higher frequency if needed
-      delay(1000); // Maintain the tone for 1 second
-      noTone(speakerPin); // Turn off the tone
-      delay(1000); // Pause for 1 second before generating the tone again
-    }
-    vTaskDelay(pdMS_TO_TICKS(10)); // adjust delay as needed for task timing
+    // if (tdsValue >= 300) {
+    //   tone(speakerPin, 500); // Change 1000 to a higher frequency if needed
+    //   vTaskDelay(1000); // Maintain the tone for 1 second
+    //   noTone(speakerPin); // Turn off the tone
+    //   vTaskDelay(1000); // Pause for 1 second before generating the tone again
+    // }
+    vTaskDelay(pdMS_TO_TICKS(100)); // adjust delay as needed for task timing
   }
 }
 
