@@ -121,3 +121,6 @@ Kasus ketiga: air panas
 * WQMS mengaplikasikan konsep IoT karena mengintegrasikan sistem monitoring jarak jauh dan menggunakan sistem benam khusus sebagai perangkat pengukur.
 * Dengan WQMS, dua tujuan telah tercapai: mengaplikasikan IoT pada kebutuhan sehari-hari dan menyediakan solusi pengukuran kualitas air sederhana. WQMS menjadi solusi bagi mereka yang membutuhkan integrasi IoT dalam memantau kualitas air.
 
+### Future work
+Untuk pengembangan selanjutnya, interface yang dibuat sendiri perlu dirancang untuk mempermudah penambahan komponen kontrol dan pemantauan. Selain itu, sensor yang diintegrasikan ke ESP32 pembaca sensor ditambahkan untuk menambah parameter pengukuran. Peraturan Menteri Kesehatan memberi 19 parameter wajib ditambah dengan parameter khusus untuk air minum.
+
