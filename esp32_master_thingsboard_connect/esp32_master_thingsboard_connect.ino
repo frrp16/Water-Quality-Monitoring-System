@@ -6,8 +6,8 @@
 
 
 // WiFi and MQTT constants
-#define WIFI_SSID "AndroidAP97AC"
-#define WIFI_PASSWORD "lmao12345"
+#define WIFI_SSID "YOUR SSID"
+#define WIFI_PASSWORD "YOUR PASSWORD"
 
 #define MQTT_BROKER "broker.hivemq.com" // Broker Testing: https://www.hivemq.com/demos/websocket-client/
 #define MQTT_PORT 8883
