@@ -88,11 +88,33 @@ Data server ke Thingsboard
 
 ### Water quality sensors to ESP32 sensor reader
 
-TDS
+Kasus pertama: kondisi air bersih pada suhu ruangan
 
-Suhu
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/c1d26fd2-9e92-4e03-8900-3871a456fd08)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/6b5885f3-851b-4b2f-b127-f6b6738863a2)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/4f2861ab-7df9-4efb-a240-0256ccbd8990)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/d8665cb2-2fcd-461e-82d6-e74f6ba50e9f)
 
-Kekeruhan
 
-## Conclusion and future work
+Kasus kedua: air keruh
+
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/fb92edcb-3668-474f-a2ad-fbdf89a88a06)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/7151673b-fc84-4202-9a50-4bf5a172e26e)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/e2763dc4-f42a-4780-8187-80ac2523dfcb)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/2b04ebf7-cc7d-4e9a-80d7-76d2cc1e45fa)
+
+
+Kasus ketiga: air panas
+
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/446ccc8e-7771-4e56-a67d-08d42e5b966f)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/b299b657-0016-4c8f-a681-818dbbad0dad)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/243f2c60-44b3-492c-9c6b-304cc692577d)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/6833e8f8-ca87-4f95-80b7-5086f23c4e53)
+
+### Evaluation
+* Untuk tes pertama yang menguji koneksi antar hardware dan software, screenshot yang ditunjukkan menandakan bahwa koneksi ketiganya terjadi dengan sempurna. ESP32 yang membaca sensor mendapatkan pesan dari ESP32 master, sedangkan master terhubung ke MQTT dan ESP32 sensor serta Thingsboard. Platform tersebut mengonfirmasi hal ini dengan screenshot connected devices.
+* Untuk tes kedua yang menguji pengiriman data dari ESP32 sensor ke Thingsboard, screenshot yang ditunjukkan menandakan bahwa pekerjaan tersebut terjadi dengan sempurna. ESP32 server menerima data dari ESP32 sensor, sedangkan Thingsboard menunjukkan data yang baru masuk pada grafiknya.
+* Tes ketiga menguji kemampuan sensor. Untuk kasus pertama di mana air bersifat jernih dengan suhu normal, grafik berada di sisi tengah yang menandakan bahwa kondisi air adalah normal. Untuk kasus kedua di mana air bersifat keruh, berisi garam, dan bersuhu normal, grafik TDS dan kekeruhan mengalami peningkatan. Untuk kasus ketiga di mana air bersifat jernih dengan suhu panas, grafik suhu mengalami peningkatan. Ketiga kasus tersebut menunjukkan bahwa sensor berhasil mendeteksi keadaan air dengan akurat.
+
+## Conclusion
 
