@@ -27,7 +27,9 @@ Sistem ini bekerja dengan cara berikut:
 * Data kekeruhan dan suhu juga ditampilkan pada layar OLED 0.96" yang terhubung dengan modul ESP32 melalui protokol I2C.
 
 ### Schematic and real-world implementation
+
 ![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/573d1974-b6d6-48b8-b6cb-59784f468900)
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/e0c0fa2d-d343-4554-8240-28eca46de661)
 
 
 ## Network infrastructure
