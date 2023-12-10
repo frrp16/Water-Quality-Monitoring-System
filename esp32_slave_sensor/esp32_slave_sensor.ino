@@ -6,8 +6,8 @@
 #include <freertos/task.h>
 
 // WiFi and MQTT constants
-#define WIFI_SSID "Galaxy A7153E8"
-#define WIFI_PASSWORD "lemaopantek"
+#define WIFI_SSID "YOUR SSID"
+#define WIFI_PASSWORD "YOUR PASSWORD"
 #define MQTT_BROKER "broker.hivemq.com" // Broker Testing: https://www.hivemq.com/demos/websocket-client/
 #define MQTT_PORT 8883
 #define MQTT_TOPIC "FinalProject/B7/water_quality"
@@ -259,11 +259,11 @@ void getTemperature(void* pvParameters) {
    Serial.println("ºC");
 
    // If the temperature is equal to or greater than 40 degrees Celsius, the buzzer beeps
-    if (temperatureC >= 34) {
-      tone(speakerPin, 100); // Change 1000 to a higher frequency if needed
-      vTaskDelay(1000); // Maintain the tone for 1 second
-      noTone(speakerPin); // Turn off the tone
-      vTaskDelay(1000); // Pause for 1 second before generating the tone again
+   // if (temperatureC >= 34) {
+   // tone(speakerPin, 100); // Change 1000 to a higher frequency if needed
+   // vTaskDelay(1000); // Maintain the tone for 1 second
+   // noTone(speakerPin); // Turn off the tone
+   // vTaskDelay(1000); // Pause for 1 second before generating the tone again
     }
 
    vTaskDelay(pdMS_TO_TICKS(1000)); // Delay using FreeRTOS function
@@ -343,6 +343,12 @@ void getTDS(void *pvParameters) {
 }
 
 void getTurbidity() {
-  // replace with real sensor reading logic!
-  turbidity = generateRandomNumber(0, 100);
+ // Replace the analog pin number with the pin to which your turbidity sensor is connected
+ int turbiditySensorPin = A0;
+ 
+ // Read the analog value from the sensor
+ int sensorValue = analogRead(turbiditySensorPin);
+ 
+ // Convert the sensor value to a turbidity value. 
+ turbidity = map(sensorValue, 0, 1023, 0, 100);
 }
