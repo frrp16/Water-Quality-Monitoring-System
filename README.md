@@ -117,4 +117,7 @@ Kasus ketiga: air panas
 * Tes ketiga menguji kemampuan sensor. Untuk kasus pertama di mana air bersifat jernih dengan suhu normal, grafik berada di sisi tengah yang menandakan bahwa kondisi air adalah normal. Untuk kasus kedua di mana air bersifat keruh, berisi garam, dan bersuhu normal, grafik TDS dan kekeruhan mengalami peningkatan. Untuk kasus ketiga di mana air bersifat jernih dengan suhu panas, grafik suhu mengalami peningkatan. Ketiga kasus tersebut menunjukkan bahwa sensor berhasil mendeteksi keadaan air dengan akurat.
 
 ## Conclusion
+* Jika air menjadi keruh, air tidak dapat digunakan. Oleh karena itu, sistem peringatan dan monitoring air keruh perlu dirancang, seperti Water Quality Monitoring System (WQMS).
+* WQMS mengaplikasikan konsep IoT karena mengintegrasikan sistem monitoring jarak jauh dan menggunakan sistem benam khusus sebagai perangkat pengukur.
+* Dengan WQMS, dua tujuan telah tercapai: mengaplikasikan IoT pada kebutuhan sehari-hari dan menyediakan solusi pengukuran kualitas air sederhana. WQMS menjadi solusi bagi mereka yang membutuhkan integrasi IoT dalam memantau kualitas air.
 
