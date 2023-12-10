@@ -1,13 +1,13 @@
 # Water-Quality-Monitoring-System
 
 ## Introduction to the problem
-Air bersih memainkan peran sentral dalam berbagai sisi kehidupan manusia. Terkadang, penjagaan kualitas air sulit untuk dilakukan karena adanya karakteristik yang tidak dapat ditentukan melalui observasi biasa. Water Quality Monitoring System (WQMS) memberikan solusi untuk masalah ini dengan mengaplikasikan konsep Internet of Things.
+Air bersih memainkan peran sentral dalam berbagai sisi kehidupan manusia. Terkadang, penjagaan kualitas air sulit untuk dilakukan karena adanya karakteristik yang tidak dapat ditentukan melalui observasi biasa. Water Quality Monitoring System (WQMS) memberikan solusi untuk masalah ini dengan mengaplikasikan konsep Internet of Things (IoT).
 
 ### Solution
 WQMS adalah sebuah proyek IoT yang bertujuan untuk mengukur dan memantau kualitas air minum, yaitu suhu dan kekeruhan air. Suhu dan kekeruhan air adalah dua parameter penting yang dapat menunjukkan tingkat kemurnian dan kesegaran air. Sistem ini menggunakan modul WiFi ESP32, sensor TDS, sensor turbidity, sensor suhu DS18B20, dan PCB.
 
 ## Hardware design and implementation details
-Pada ESP32 untuk pembacaan sensor, sensor DS18B20 Temperature Sensor bertugas mengukur suhu pada air. Selain itu, sebuah senor SEN0244 TDS Sensor bertugas mengukur total dissolved Solid (TDS) dalam air, dan sebuah SEN0189 Turbidity Sensor bertugas mengukur tingkat kekeruhan dalam air. Data yang dibaca oleh ESP32 ini akan diteruskan dengan menggunakan protokol MQTT ke ESP32 server yang berfungsi untuk menerima dan mengirimkan data ke Thingsboard. Kedua ESP32 yang digunakan akan terkoneksi dengan internet melalui jaringan Wi-Fi. 
+Pada ESP32 untuk pembacaan sensor, sensor DS18B20 Temperature Sensor bertugas mengukur suhu pada air. Selain itu, sebuah senor SEN0244 TDS Sensor bertugas mengukur Total Dissolved Solid (TDS) dalam air, dan sebuah SEN0189 Turbidity Sensor bertugas mengukur tingkat kekeruhan dalam air. Data yang dibaca oleh ESP32 ini akan diteruskan dengan menggunakan protokol MQTT ke ESP32 server yang berfungsi untuk menerima dan mengirimkan data ke Thingsboard. Kedua ESP32 yang digunakan akan terkoneksi dengan internet melalui jaringan Wi-Fi. 
 
 ### Components
 * Modul WiFi ESP321
