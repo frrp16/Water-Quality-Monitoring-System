@@ -1,12 +1,12 @@
 # Water-Quality-Monitoring-System
 
-# Introduction to the problem
+## Introduction to the problem
 Air bersih memainkan peran sentral dalam berbagai sisi kehidupan manusia. Terkadang, penjagaan kualitas air sulit untuk dilakukan karena adanya karakteristik yang tidak dapat ditentukan melalui observasi biasa. Water Quality Monitoring System (WQMS) memberikan solusi untuk masalah ini dengan mengaplikasikan konsep Internet of Things.
 
 ### Solution
 WQMS adalah sebuah proyek IoT yang bertujuan untuk mengukur dan memantau kualitas air minum, yaitu suhu dan kekeruhan air. Suhu dan kekeruhan air adalah dua parameter penting yang dapat menunjukkan tingkat kemurnian dan kesegaran air. Sistem ini menggunakan modul WiFi ESP32, sensor TDS, sensor turbidity, sensor suhu DS18B20, dan PCB.
 
-# Hardware design and implementation details
+## Hardware design and implementation details
 Pada ESP32 untuk pembacaan sensor, sensor DS18B20 Temperature Sensor bertugas mengukur suhu pada air. Selain itu, sebuah senor SEN0244 TDS Sensor bertugas mengukur total dissolved Solid (TDS) dalam air, dan sebuah SEN0189 Turbidity Sensor bertugas mengukur tingkat kekeruhan dalam air. Data yang dibaca oleh ESP32 ini akan diteruskan dengan menggunakan protokol MQTT ke ESP32 server yang berfungsi untuk menerima dan mengirimkan data ke Thingsboard. Kedua ESP32 yang digunakan akan terkoneksi dengan internet melalui jaringan Wi-Fi. 
 
 ### Components
@@ -30,11 +30,11 @@ Sistem ini bekerja dengan cara berikut:
 ![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/573d1974-b6d6-48b8-b6cb-59784f468900)
 
 
-# Network infrastructure
+## Network infrastructure
 * ESP32 yang berperan sebagai **master** membuat dua buah client koneksi Wi-Fi, yaitu untuk mengendalikan koneksi dari MQTT dan untuk mengendalikan koneksi ke Thingsboard. Perangkat akan melakukan koneksi ke Wi-Fi menggunakan WiFiSecure yang dilanjutkan dengan menjalankan task untuk koneksi ke MQTT setelah koneksi WiFi berhasil. Setelah koneksi MQTT berhasil dan telah berlangganan dengan topik yang dispesifikasikan, perangkat akan mengirimkan pesan pembuka dan siap untuk membaca data dari ESP32 sensor. Koneksi ke Thingsboard akan dijalankan pada fungsi loop dan akan melakukan reconnection bila koneksi terputus.
 * ESP32 yang berperan sebagai **slave** (sensor) membuat satu buah client koneksi Wi-Fi, yaitu untuk mengirimkan data ke MQTT. Protokol koneksi Wi-Fi dan MQTT untuk sensor sama dengan master.
 
-# Software implementation details
+## Software implementation details
 * ESP32 yang berperan sebagai **master** menerima data dari MQTT menggunakan fungsi callback dalam format JSON. Data yang dikirimkan ke Thingsboard mencakup tiga nilai, yaitu TDS, suhu, dan kekeruhan.
 * ESP32 yang berperan sebagai **slave** (sensor) mengambil data dari sensor, di mana tiap sensor memiliki interval pembacaan yang bervariasi. Pengiriman data ke ESP32 master melalui MQTT dilakukan setiap lima detik untuk sinkronisasi dan mencegah overload. Data yang dikirimkan memiliki format JSON.
 * Thingsboard menampilkan dan memonitor hasil pembacaan sensor yang disebut Telemetry. Sebuah line chart yang terdapat dalam dashboard menunjukkan alur pembacaan sensor dan notifikasi alarm jika data dari Telemetry melebihi ambang batas. Untuk melakukan fungsi logic dari rule chain, hardware yang terhubung memiliki sebuah attribute khusus.
@@ -62,7 +62,37 @@ Data
 ![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/a0e25583-9e09-493d-a0be-8e52d91560f6)
 ![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/7b908544-10cd-4eb0-917b-90f5884d8719)
 
-# Test results and performance evaluation
+## Test results and performance evaluation
+### Connection between hardware and software
+ESP32 server
 
-# Conclusion and future work
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/5ec65296-9b61-4f2a-9a0b-90811bd50c24)
+
+ESP32 sensor reader
+
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/08d8a55f-ee3e-48da-ab6f-44f214209419)
+
+Thingsboard devices
+
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/472b405f-5f55-4864-8ff5-269ea0395013)
+
+### Connection between ESP32s and server-Thingsboard
+
+Data sensor ke server
+
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/108ca38b-1a8d-4780-8064-93bc171aead5)
+
+Data server ke Thingsboard
+
+![image](https://github.com/frrp16/Water-Quality-Monitoring-System/assets/91055987/3e580e59-c138-46a2-ac19-9c99d8120b05)
+
+### Water quality sensors to ESP32 sensor reader
+
+TDS
+
+Suhu
+
+Kekeruhan
+
+## Conclusion and future work
 
